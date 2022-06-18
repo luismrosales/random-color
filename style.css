@@ -48,7 +48,7 @@ svg {
   padding: 1rem;
   width: 80%;
   border-top-left-radius: 1rem;
-  border-top-right-radius: 1rem;
+  border-top-right-radius: 2rem;
   pointer-events: none;
   /* adding an adjustment class */
   transform: translateY(100px);
@@ -67,7 +67,7 @@ svg {
   right: 0;
   padding: 0.5rem;
   border-top-right-radius: 1rem;
-  border-bottom-left-radius: 0.5rem;
+  border-bottom-left-radius: 0.4rem;
   border: none;
   background-color: rgb(73, 73, 73);
   color: white;
@@ -127,7 +127,7 @@ input[type="range"] {
 
 .copy-container,
 .save-container,
-.library-contianer {
+.library-container {
   position: fixed;
   top: 0%;
   left: 0%;
@@ -165,7 +165,7 @@ input[type="range"] {
 
 .copy-container.active,
 .save-container.active,
-.library-contianer.active {
+.library-container.active {
   opacity: 1;
   pointer-events: all;
 }
@@ -180,9 +180,12 @@ input[type="range"] {
   font-size: 1.5rem;
   padding: 1rem;
 }
-.close-save,
-.close-library {
+.close-save {
   border-top-right-radius: 1rem;
+  border-bottom-left-radius: 1rem;
+}
+.close-library {
+  border-top-right-radius: 0.1rem;
   border-bottom-left-radius: 1rem;
 }
 .submit-save {
@@ -193,4 +196,43 @@ input[type="range"] {
   background-color: rgb(31, 33, 63);
   color: white;
   border-radius: 1rem;
+}
+
+.library-popup {
+  min-width: 40%;
+  padding: 1rem;
+  justify-content: flex-start;
+  overflow-y: scroll;
+  max-height: 50vh;
+}
+
+.custom-palette {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 100%;
+  padding: 2rem;
+}
+.small-preview {
+  display: flex;
+  flex: 1;
+}
+
+.custom-palette h4 {
+  flex: 1;
+}
+.small-preview div {
+  height: 5rem;
+  width: 2rem;
+  flex: 1;
+}
+
+.pick-palette-btn {
+  height: 4rem;
+  border: none;
+  padding: 1rem;
+  cursor: pointer;
+  font-size: 1.2rem;
+  color: white;
+  background: black;
 }
