@@ -207,6 +207,12 @@ const saveInput = document.querySelector(".save-container input");
 // Event Listeners
 saveButton.addEventListener("click", openPalette);
 closeSave.addEventListener("click", closePalette);
+lockButton.forEach((button, index) => {
+  button.addEventListener("click", () => {
+    toggleLockButton(index);
+  });
+});
+
 // functions for save and local storage
 function openPalette(e) {
   const popup = saveContainer.children[0];
@@ -217,6 +223,12 @@ function closePalette(e) {
   const popup = saveContainer.children[0];
   saveContainer.classList.remove("active");
   popup.classList.remove("active");
+}
+
+function toggleLockButton(index) {
+  colorDivs[index].classList.toggle("locked");
+  lockButton[index].children[0].classList.toggle("fa-lock-open");
+  lockButton[index].children[0].classList.toggle("fa-lock");
 }
 
 // function calls
