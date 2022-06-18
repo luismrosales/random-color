@@ -3,6 +3,7 @@ const colorDivs = document.querySelectorAll(".color");
 const generateBtn = document.querySelector(".generate");
 const sliders = document.querySelectorAll('input[type="range"]');
 const currentHexes = document.querySelectorAll(".color h2");
+const popup = document.querySelector(".copy-container");
 let initialColors;
 
 // Event listeners
@@ -13,6 +14,18 @@ colorDivs.forEach((slider, index) => {
   slider.addEventListener("change", () => {
     updateTextUi(index);
   });
+});
+
+currentHexes.forEach((hex) => {
+  hex.addEventListener("click", () => {
+    copyToClipboard(hex);
+  });
+});
+
+popup.addEventListener("transitionend", () => {
+  const popupBox = popup.children[0];
+  popup.classList.remove("active");
+  popupBox.classList.remove("active");
 });
 
 // Functions
@@ -95,6 +108,8 @@ function hslControls(e) {
     .set("hsl.h", hue.value);
 
   colorDivs[index].style.backgroundColor = color;
+  // update the colors of the inputs
+  colorizeSliders(color, hue, brightness, saturation);
 }
 
 function updateTextUi(index) {
@@ -129,6 +144,19 @@ function resetInputs() {
       slider.value = Math.floor(satValue * 100) / 100;
     }
   });
+}
+
+function copyToClipboard(hex) {
+  const el = document.createElement("textarea");
+  el.value = hex.innerText;
+  document.body.appendChild(el);
+  el.select();
+  navigator.clipboard.writeText(hex.innerText);
+  document.body.removeChild(el);
+  // popup animation
+  const popupBox = popup.children[0];
+  popup.classList.add("active");
+  popupBox.classList.add("active");
 }
 
 // function calls
