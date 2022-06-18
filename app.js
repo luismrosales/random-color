@@ -7,9 +7,14 @@ const popup = document.querySelector(".copy-container");
 const adjustBtn = document.querySelectorAll(".adjust");
 const closeAdjust = document.querySelectorAll(".close-adjustmant");
 const sliderContainer = document.querySelectorAll(".sliders");
+const lockButton = document.querySelectorAll(".lock");
 let initialColors;
+// This is for local storage
+let savedPalettes = [];
 
 // Event listeners
+generateBtn.addEventListener("click", randomColors);
+
 sliders.forEach((slider) => {
   slider.addEventListener("input", hslControls);
 });
@@ -58,7 +63,13 @@ function randomColors() {
     const hexText = div.children[0];
     const randomColor = generateHex();
     // add initial colors to the array
-    initialColors.push(chroma(randomColor).hex());
+    if (div.classList.contains("locked")) {
+      initialColors.push(hexText.innerText);
+      return;
+    } else {
+      initialColors.push(chroma(randomColor).hex());
+    }
+
     //Add color to the background
     div.style.backgroundColor = randomColor;
     hexText.innerText = randomColor;
@@ -75,6 +86,11 @@ function randomColors() {
   });
   // Reset inputs
   resetInputs();
+  // Check for contrast on buttons
+  adjustBtn.forEach((button, index) => {
+    checkTextContrast(initialColors[index], button);
+    checkTextContrast(initialColors[index], lockButton[index]);
+  });
 }
 
 function checkTextContrast(color, text) {
@@ -180,6 +196,27 @@ function openAdjustmentPanel(index) {
 
 function closeAdjustmentPanel(index) {
   sliderContainer[index].classList.remove("active");
+}
+
+// Implement save to palette and local storage
+const saveButton = document.querySelector(".save");
+const submitSave = document.querySelector(".submit-save");
+const closeSave = document.querySelector(".close-save");
+const saveContainer = document.querySelector(".save-container");
+const saveInput = document.querySelector(".save-container input");
+// Event Listeners
+saveButton.addEventListener("click", openPalette);
+closeSave.addEventListener("click", closePalette);
+// functions for save and local storage
+function openPalette(e) {
+  const popup = saveContainer.children[0];
+  saveContainer.classList.add("active");
+  popup.classList.add("active");
+}
+function closePalette(e) {
+  const popup = saveContainer.children[0];
+  saveContainer.classList.remove("active");
+  popup.classList.remove("active");
 }
 
 // function calls
