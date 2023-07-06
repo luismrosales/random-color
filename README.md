@@ -1,4 +1,4 @@
-# Random Color Pallete Generator
+# Random Color Palette Generator
 
 This desktop website helps you pick from hundreds of random colors and allows you to save them.
 <img width="1041" alt="Screen Shot 2022-06-24 at 10 21 29 AM" src="https://user-images.githubusercontent.com/82245627/175559636-684782b6-288c-48dd-9563-e1d7b24dc361.png">
